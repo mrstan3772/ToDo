@@ -1,4 +1,10 @@
 {
+    "composer-unused/contracts": {
+        "version": "0.2.0"
+    },
+    "composer-unused/symbol-parser": {
+        "version": "0.1.8"
+    },
     "doctrine/annotations": {
         "version": "1.13",
         "recipe": {
@@ -16,6 +22,9 @@
     },
     "doctrine/common": {
         "version": "3.2.2"
+    },
+    "doctrine/data-fixtures": {
+        "version": "1.5.3"
     },
     "doctrine/dbal": {
         "version": "3.3.5"
@@ -35,6 +44,18 @@
             "config/packages/doctrine.yaml",
             "src/Entity/.gitignore",
             "src/Repository/.gitignore"
+        ]
+    },
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "1f5514cfa15b947298df4d771e694e578d4c204d"
+        },
+        "files": [
+            "src/DataFixtures/AppFixtures.php"
         ]
     },
     "doctrine/doctrine-migrations-bundle": {
@@ -80,6 +101,9 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.7"
     },
+    "icanhazstring/composer-unused": {
+        "version": "0.8.2"
+    },
     "laminas/laminas-code": {
         "version": "4.5.1"
     },
@@ -88,6 +112,9 @@
     },
     "nikic/php-parser": {
         "version": "v4.13.2"
+    },
+    "ondram/ci-detector": {
+        "version": "4.1.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -131,6 +158,9 @@
     "symfony/asset": {
         "version": "v6.0.7"
     },
+    "symfony/browser-kit": {
+        "version": "v6.0.3"
+    },
     "symfony/cache": {
         "version": "v6.0.6"
     },
@@ -151,6 +181,9 @@
         "files": [
             "bin/console"
         ]
+    },
+    "symfony/css-selector": {
+        "version": "v6.0.3"
     },
     "symfony/debug-bundle": {
         "version": "6.0",
@@ -175,6 +208,9 @@
     },
     "symfony/doctrine-messenger": {
         "version": "v6.0.7"
+    },
+    "symfony/dom-crawler": {
+        "version": "v6.0.6"
     },
     "symfony/dotenv": {
         "version": "v6.0.5"
@@ -314,6 +350,21 @@
     },
     "symfony/password-hasher": {
         "version": "v6.0.3"
+    },
+    "symfony/phpunit-bridge": {
+        "version": "6.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.3",
+            "ref": "97cb3dc7b0f39c7cfc4b7553504c9d7b7795de96"
+        },
+        "files": [
+            ".env.test",
+            "bin/phpunit",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
+        ]
     },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.25.0"
@@ -502,5 +553,8 @@
     },
     "webmozart/assert": {
         "version": "1.10.0"
+    },
+    "webmozart/glob": {
+        "version": "4.5.0"
     }
 }
