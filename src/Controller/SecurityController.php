@@ -1,25 +1,32 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class SecurityController extends Controller
+class SecurityController extends AbstractController
 {
-    /**
-     * @Route("/login", name="security_login")
-     */
-    public function login(Request $request): Response
+    use TargetPathTrait;
+
+    #[Route('/login', name: 'security_login')]
+    public function login(AuthenticationUtils $authenticationUtils, Request $request,): Response
     {
-        $authenticationUtils = $this->get('security.authentication_utils');
+        if ($this->getUser()) {
+            return $this->redirectToRoute('homepage');
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+
+        $this->saveTargetPath($request->getSession(), 'main', $this->generateUrl('homepage'));
 
         return $this->render(
             'security/login.html.twig',
@@ -30,19 +37,9 @@ class SecurityController extends Controller
         );
     }
 
-    /**
-     * @Route("/login_check", name="login_check")
-     */
-    public function loginCheck()
+    #[Route('/logout', name: 'security_logout')]
+    public function logout(): void
     {
-        return $this->redirectToRoute('login');
-    }
-
-    /**
-     * @Route("/logout", name="logout")
-     */
-    public function logoutCheck()
-    {
-        // This code is never executed.
+        throw new \Exception('This should never be reached!');
     }
 }
