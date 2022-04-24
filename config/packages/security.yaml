@@ -16,9 +16,8 @@ security:
             security: false
         main:
             lazy: true
-            anonymous: true
             provider: app_user_provider
-            custom_authenticator: App\Security\LoginFormAuthenticator
+            # custom_authenticator: App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
             # provider: users_in_memory
@@ -37,7 +36,7 @@ security:
         - { path: ^/users, roles: ROLE_ADMIN }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        
+
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
 
