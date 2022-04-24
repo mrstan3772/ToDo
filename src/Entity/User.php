@@ -6,11 +6,26 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[
+    UniqueEntity(
+        fields: 'email',
+        message: 'Il existe déjà un compte avec l\'adresse e-mail {{ value }}.',
+        groups: ['registration']
+    )
+]
+#[
+    UniqueEntity(
+        fields: 'username',
+        message: 'Il existe déjà un compte avec le nom d\'utilisateur {{ value }}.',
+        groups: ['registration']
+    )
+]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -18,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[ORM\Column(type: 'string', length: 80)]
+    #[ORM\Column(type: 'string', length: 80, unique: true)]
     #[
         Assert\NotBlank(
             message: 'Vous devez saisir une adresse email.',
@@ -34,7 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'json')]
     private array $roles = [];
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: 'string', length: 50, unique: true)]
     #[
         Assert\NotBlank(
             message: 'Vous devez saisir un nom d\'utilisateur.',
