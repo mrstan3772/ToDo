@@ -18,13 +18,17 @@ class TaskManager implements TaskManagerInterface
     public function createTask(Task $task): void
     {
         $token = $this->tokenStorage->getToken();
+        
         if (!$token instanceof TokenInterface) {
             throw new Exception();
         }
+
         $user = $token->getUser();
+
         if (!$user instanceof User) {
             throw new Exception();
         }
+
         $task->setUser($user);
 
         $this->entityManager->persist($task);

@@ -1,17 +1,42 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Connexion{% endblock %}
+
 {% block body %}
     {% if error %}
         <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <form action="{{ path('login_check') }}" method="post">
-        <label for="username">Nom d'utilisateur :</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="_password" />
-
-        <button class="btn btn-success" type="submit">Se connecter</button>
-    </form>
+    <main id="main" class="mt-3 mb-5">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-5 bg-light mt-4 p-4 d-flex justify-content-center">
+                    <div class="well text-center">
+                        <h1>Connexion</h1>
+                        <form action="{{ path('security_login') }}" method="post">
+                            <fieldset>
+                                <div class="mb-3">
+                                    <label for="username">{{ 'Nom d\'utilisateur' }}</label>
+                                    <input type="text" id="username" name="username" value="{{ last_username }}" class="form-control"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password">{{ 'Mot de passe' }}</label>
+                                    <input type="password" id="password" name="password" class="form-control" />
+                                </div>
+                                {# <div class="form-check mb-3">
+                                    <label for="_remember_me"</label>
+                                    <input type="checkbox" id="_remember_me" name="_remember_me" class="form-check-input"> Se souvenir de moi
+                                </div> #}
+                                <input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}"/>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                                <button type="submit" class="btn btn-primary mt-4">
+                                    <i class="fa fa-sign-in" aria-hidden="true"></i> {{ 'Connexion' }}
+                                </button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 {% endblock %}
