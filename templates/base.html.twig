@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="">
-		<meta name="author" content="">
+		<meta name="author" content="OC">
 
 		<title>
 			{% block title %}To Do List App
@@ -30,7 +30,7 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-light navbar-fixed-top navbar-expand-lg" style="background-color: #e3f2fd;" role="navigation">
+        <nav class="navbar navbar-light bg-light" style="background-color: #e3f2fd !important;" role="navigation">
             <a class="navbar-brand" href="{{ path('homepage') }}">To Do List app</a>
             <img src="{{ asset('img/Logo_OpenClassrooms.png') }}" alt="OpenClassrooms"/>
 
@@ -48,7 +48,7 @@
         </nav>
 
         <!-- Page Content -->
-        <div class="container">
+        <div class="container mt-5">
             <div class="row">
                 <div class="col-md-12">
                     {% for flash_message in app.session.flashBag.get('success') %}
