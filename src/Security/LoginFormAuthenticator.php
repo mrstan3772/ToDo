@@ -52,10 +52,6 @@ class LoginFormAuthenticator extends AbstractAuthenticator
                         throw new UserNotFoundException();
                     }
 
-                    if (!$user->isVerified()) {
-                        throw new UserNotFoundException();
-                    }
-
                     return $user;
                 }
             ),
