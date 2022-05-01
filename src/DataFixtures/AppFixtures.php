@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Factory\TaskFactory;
+use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -9,8 +11,30 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // $product = new Product();
-        // $manager->persist($product);
+        UserFactory::createOne(
+            [
+                'email' => 'stanlj8250@gmail.com',
+                'username' => 'stanley'
+            ]
+        );
+
+        $created_users = UserFactory::createMany(10);
+
+        TaskFactory::createMany(
+            10,
+            [
+                'user' => null
+            ]
+        );
+
+        foreach ($created_users as $user) {
+            TaskFactory::createMany(
+                25,
+                [
+                    'user' => $user
+                ]
+            );
+        }
 
         $manager->flush();
     }
