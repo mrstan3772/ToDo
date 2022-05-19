@@ -27,6 +27,12 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
+        <exclude>
+            <directory>src/DataFixtures</directory>
+            <directory>src/Factory</directory>
+            <directory>src/Repository</directory>
+            <directory>src/Security</directory>
+        </exclude>
     </coverage>
 
     <listeners>
@@ -39,4 +45,7 @@
         <extension class="Symfony\Component\Panther\ServerExtension" />
     </extensions>
     -->
+    <extensions>
+        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
+    </extensions>
 </phpunit>

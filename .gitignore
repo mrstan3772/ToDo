@@ -16,3 +16,13 @@
 /.vscode/
 /.history/
 ###< VSCODE ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+tests/test-coverage
+###< phpunit/phpunit ###
+
+### REPORT ###
+reports/
+### REPORT ###
