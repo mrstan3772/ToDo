@@ -2,7 +2,7 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/3576837d54702d4b43b5/maintainability)](https://codeclimate.com/github/mrstan3772/ToDoList/maintainability) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/57ca0bd3dd8348a892a269a193c0c0df)](https://www.codacy.com/gh/mrstan3772/ToDoList/dashboard?utm_source=github.com&utm_medium=referral&utm_content=mrstan3772/ToDoList&utm_campaign=Badge_Grade)
 
-The TODOLIST application purpose is to manage his daily tasks.
+The  **TODOLIST** application purpose is to manage his daily tasks.
 
 It was entirely designed in PHP with Symfony framework.
 It's provided with a set of resources including this one:
