@@ -83,7 +83,7 @@ class UserControllerTest extends WebTestCase
     {
         $user = $this->logUserTest('stanley', $this->client);
 
-        $user_id = strval($user->getId());
+        $user_id = (string) $user->getId();
 
         $crawler =  $this->client->request('GET', '/users/' . $user_id . '/edit');
 

@@ -83,11 +83,11 @@ class SmokeTest extends WebTestCase
     {
         // $userRepository = static::getContainer()->get(UserRepository::class);
         // $user = $userRepository->findAll();
-        // $user_id = strval($user[0]->getId());
+        // $user_id = (string) $user[0]->getId();
 
         // $taskRepository = static::getContainer()->get(TaskRepository::class);
         // $task = $taskRepository->findAll();
-        // $task_id =  strval($task[0]->getId());
+        // $task_id = (string) $task[0]->getId();
 
         return [
             'homepage' => ['homepage', '/'],
@@ -110,7 +110,7 @@ class SmokeTest extends WebTestCase
     {
         // $userRepository = static::getContainer()->get(UserRepository::class);
         // $user = $userRepository->findAll();
-        // $user_id = strval($user[0]->getId());
+        // $user_id = (string) $user[0]->getId();
 
         return [
             'user_list' => ['userListe', '/users/'],

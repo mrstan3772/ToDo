@@ -31,7 +31,7 @@ class TaskControllerTest extends WebTestCase
         return  $matches[0][0];
     }
 
-    public function logUserTest(string $username, KernelBrowser $client): User
+    public function logUserTest(string $username): User
     {
         /** @var \App\Repository\UserRepository $userRepository*/
         $userRepository = static::getContainer()->get(UserRepository::class);
@@ -100,7 +100,7 @@ class TaskControllerTest extends WebTestCase
     {
         $user = $this->logUserTest('stanley', $this->client);
 
-        $task_id = strval($user->getTask()->first()->getId());
+        $task_id = (string) $user->getTask()->first()->getId();
 
         $crawler = $this->client->request('GET', '/tasks/' . $task_id . '/edit');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
