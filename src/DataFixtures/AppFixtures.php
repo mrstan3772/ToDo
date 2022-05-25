@@ -22,7 +22,8 @@ class AppFixtures extends Fixture
         TaskFactory::createMany(
             25,
             [
-                'user' => $created_admin_user
+                'user' => $created_admin_user,
+                'isDone' => false,
             ]
         );
 
