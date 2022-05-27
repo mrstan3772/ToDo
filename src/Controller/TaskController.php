@@ -18,7 +18,7 @@ class TaskController extends AbstractController
 {
 
     #[Route('/tasks', name: 'task_list')]
-    public function listAction(TaskRepository $taskRepository) : Response
+    public function listAction(TaskRepository $taskRepository): Response
     {
         $tasks = $taskRepository->findBy([], ['createdAt' => 'desc']);
 
@@ -26,7 +26,7 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/done', methods: ['GET', 'POST'], name: 'task_list_done')]
-    public function listDone(TaskRepository $taskRepository) : Response
+    public function listDone(TaskRepository $taskRepository): Response
     {
         $tasks = $taskRepository->findBy(['isDone' => true], ['createdAt' => 'desc']);
 
@@ -34,16 +34,31 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/todo', methods: ['GET', 'POST'], name: 'task_list_to_do')]
-    public function listToDo(TaskRepository $taskRepository) : Response
+    public function listToDo(TaskRepository $taskRepository): Response
     {
         $tasks = $taskRepository->findBy(['isDone' => false], ['createdAt' => 'desc']);
 
         return $this->render('task/list.html.twig', ['tasks' => $tasks]);
     }
 
-    #[Route('/tasks/create', name: 'task_create')]
-    public function createAction(Request $request, TaskManagerInterface $taskManager) : Response
+    #[Route('/tasks/create', methods: ['GET', 'POST'], name: 'task_create')]
+    public function createAction(Request $request, TaskManagerInterface $taskManager): Response
     {
+        if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $error = '';
+            $lastUsername = '';
+
+            $this->addFlash('error', 'Connectez-vous pour créer une tâche.');
+
+            return $this->render(
+                'security/login.html.twig',
+                array(
+                    'last_username' => $lastUsername,
+                    'error' => $error,
+                )
+            );
+        }
+
         $task = new Task();
 
         $form = $this->createForm(TaskType::class, $task);
@@ -69,7 +84,7 @@ class TaskController extends AbstractController
 
     #[Route('/tasks/{id}/edit',  methods: ['GET', 'POST'], name: 'task_edit')]
     #[IsGranted('task_edit', subject: 'task')]
-    public function editAction(Task $task, Request $request, EntityManagerInterface $em) : Response
+    public function editAction(Task $task, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(TaskType::class, $task);
 
@@ -94,7 +109,7 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/{id}/toggle', methods: ['GET', 'POST'], name: 'task_toggle')]
-    public function toggleTaskAction(Task $task, TaskManagerInterface $taskManager) : Response
+    public function toggleTaskAction(Task $task, TaskManagerInterface $taskManager): Response
     {
         try {
             $taskManager->toggleTask($task);
@@ -110,8 +125,8 @@ class TaskController extends AbstractController
 
     #[Route('/tasks/{id}/delete',  methods: ['GET', 'POST'], name: 'task_delete')]
     #[IsGranted('task_delete', subject: 'task')]
-    public function deleteTaskAction(Task $task, EntityManagerInterface $em) : Response
-    {   
+    public function deleteTaskAction(Task $task, EntityManagerInterface $em): Response
+    {
         $em->remove($task);
         $em->flush();
 
